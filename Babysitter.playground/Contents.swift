@@ -52,6 +52,14 @@ struct Babysitter {
         return Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour ?? 0
     }
     
+    //Format our charge calculation into readable String
+    func formatChargeIntoCurrency(charge: Float) -> String {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.locale = Locale.current
+        currencyFormatter.numberStyle = .currency
+        return currencyFormatter.string(from: charge as NSNumber)!
+    }
+    
 }
 
 
@@ -62,5 +70,5 @@ let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 21:00:0
 let midnightTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
 let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 04:00:00 -0400")
 
-//test calculateNightlyCharge function (temporary)
-print(babysitter.calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime))
+let amountToCharge = babysitter.calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime)
+print("The babysitter made \(babysitter.formatChargeIntoCurrency(charge: amountToCharge)) tonight")
