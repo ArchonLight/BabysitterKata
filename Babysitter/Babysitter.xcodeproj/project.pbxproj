@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2746597A214F1F7B00D665B1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465979214F1F7B00D665B1 /* Utility.swift */; };
+		2746597B214F1F7B00D665B1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465979214F1F7B00D665B1 /* Utility.swift */; };
 		275B06C5214EFDB70036CAD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275B06C4214EFDB70036CAD0 /* AppDelegate.swift */; };
-		275B06C7214EFDB70036CAD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275B06C6214EFDB70036CAD0 /* ViewController.swift */; };
+		275B06C7214EFDB70036CAD0 /* BabysitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275B06C6214EFDB70036CAD0 /* BabysitterViewController.swift */; };
 		275B06CA214EFDB70036CAD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 275B06C8214EFDB70036CAD0 /* Main.storyboard */; };
 		275B06CC214EFDD10036CAD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 275B06CB214EFDD10036CAD0 /* Assets.xcassets */; };
 		275B06CF214EFDD10036CAD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 275B06CD214EFDD10036CAD0 /* LaunchScreen.storyboard */; };
@@ -26,9 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27465979214F1F7B00D665B1 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		275B06C1214EFDB70036CAD0 /* Babysitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babysitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		275B06C4214EFDB70036CAD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		275B06C6214EFDB70036CAD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		275B06C6214EFDB70036CAD0 /* BabysitterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabysitterViewController.swift; sourceTree = "<group>"; };
 		275B06C9214EFDB70036CAD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		275B06CB214EFDD10036CAD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		275B06CE214EFDD10036CAD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,6 +59,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27465978214F1F3B00D665B1 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				27465979214F1F7B00D665B1 /* Utility.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		2746597C214F207900D665B1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		275B06B8214EFDB60036CAD0 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				275B06C4214EFDB70036CAD0 /* AppDelegate.swift */,
+				2746597C214F207900D665B1 /* Extensions */,
+				27465978214F1F3B00D665B1 /* Utility */,
 				275B06E5214EFE660036CAD0 /* View Controllers */,
 				275B06E4214EFE540036CAD0 /* Storyboards */,
 				275B06CB214EFDD10036CAD0 /* Assets.xcassets */,
@@ -107,7 +127,7 @@
 		275B06E5214EFE660036CAD0 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				275B06C6214EFDB70036CAD0 /* ViewController.swift */,
+				275B06C6214EFDB70036CAD0 /* BabysitterViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -213,8 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				275B06C7214EFDB70036CAD0 /* ViewController.swift in Sources */,
+				275B06C7214EFDB70036CAD0 /* BabysitterViewController.swift in Sources */,
 				275B06C5214EFDB70036CAD0 /* AppDelegate.swift in Sources */,
+				2746597A214F1F7B00D665B1 /* Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2746597B214F1F7B00D665B1 /* Utility.swift in Sources */,
 				275B06DA214EFDD20036CAD0 /* BabysitterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
