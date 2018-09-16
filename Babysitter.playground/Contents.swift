@@ -30,9 +30,14 @@ struct Babysitter {
         var phase3Charge: Float = 0.0
         
         //calculate number of hours worked from startTime to endTime
+        //startTime -> bedTime
         var numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime)
+        //bedTime -> midnightTime
         var numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime)
-        let numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime)
+        //midnightTime -> endTime
+        var numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime)
+        //bedTime -> endTime, to see if endtime comes before bedtime
+        let numOfHoursForBedTimeToEndTime = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: endTime)
         
         //We need to allow for bedTime to be after midnight and endTime to be before midnight
         //Check if bedtime is after midnight and adjust
@@ -44,6 +49,13 @@ struct Babysitter {
         //check if endTIme is before Midnight
         if numOfHoursForPhase3<0{
             numOfHoursForPhase2 = numOfHoursForPhase2+numOfHoursForPhase3
+        }
+        
+        //check if endTime is before bedtime & midnight, if it is we only need to calculate startTime -> endTime
+        if numOfHoursForBedTimeToEndTime<0 && numOfHoursForPhase3<0{
+            numOfHoursForPhase1 = numOfHoursForPhase1+numOfHoursForBedTimeToEndTime
+            numOfHoursForPhase2 = 0
+            numOfHoursForPhase3 = 0
         }
         
         //calculate the charge in deimal to charge for each work span
@@ -92,9 +104,9 @@ struct Babysitter {
 let babysitter = Babysitter()
 //setup time constants for the hours worked. -0400 sets to our timezone
 let startTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 17:00:00 -0400")
-let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 21:00:00 -0400")
+let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 03:00:00 -0400")
 let midnightTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
-let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 23:00:00 -0400")
+let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 01:00:00 -0400")
 
 let amountToCharge = babysitter.calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime)
 print("The babysitter made \(babysitter.formatChargeIntoCurrency(charge: amountToCharge)) tonight")
