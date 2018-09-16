@@ -24,15 +24,41 @@ struct Babysitter {
     //calculate the nightly charge for hours worked
     func calculateNightlyCharge(startTime: Date, bedTime: Date, midnightTime: Date, endTime: Date) -> Float {
         //FIXME: This calculation will caclulate fractional hours - limit to whole hours in View?
+        //default charges to 0.0
+        var phase1Charge: Float = 0.0
+        var phase2Charge: Float = 0.0
+        var phase3Charge: Float = 0.0
+        
         //calculate number of hours worked from startTime to endTime
-        let numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime)
-        let numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime)
+        var numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime)
+        var numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime)
         let numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime)
         
+        //We need to allow for bedTime to be after midnight and endTime to be before midnight
+        //Check if bedtime is after midnight and adjust
+        if numOfHoursForPhase2<0{
+            //subtract the number of hours calculated that bedtime is after midnight
+            numOfHoursForPhase1 = numOfHoursForPhase1+numOfHoursForPhase2
+        }
+        
+        //check if endTIme is before Midnight
+        if numOfHoursForPhase3<0{
+            numOfHoursForPhase2 = numOfHoursForPhase2+numOfHoursForPhase3
+        }
+        
         //calculate the charge in deimal to charge for each work span
-        let phase1Charge = Float(numOfHoursForPhase1)*startToBedTimeWage
-        let phase2Charge = Float(numOfHoursForPhase2)*startToBedTimeWage
-        let phase3Charge = Float(numOfHoursForPhase3)*midnightToEndOfJobWage
+        //prevent a negative phase charge from impacting the calculation
+        if numOfHoursForPhase1>0{
+            phase1Charge = Float(numOfHoursForPhase1)*startToBedTimeWage
+        }
+
+        if numOfHoursForPhase2>0{
+            phase2Charge = Float(numOfHoursForPhase2)*bedtimeToMidnightWage
+        }
+
+        if numOfHoursForPhase3>0{
+            phase3Charge = Float(numOfHoursForPhase3)*midnightToEndOfJobWage
+        }
         
         return phase1Charge+phase2Charge+phase3Charge
     }
@@ -68,7 +94,7 @@ let babysitter = Babysitter()
 let startTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 17:00:00 -0400")
 let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 21:00:00 -0400")
 let midnightTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
-let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 04:00:00 -0400")
+let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 23:00:00 -0400")
 
 let amountToCharge = babysitter.calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime)
 print("The babysitter made \(babysitter.formatChargeIntoCurrency(charge: amountToCharge)) tonight")
