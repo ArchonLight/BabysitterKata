@@ -24,32 +24,20 @@ struct Babysitter {
     //calculate the nightly charge for hours worked
     func calculateNightlyCharge(startTime: Date, bedTime: Date, midnightTime: Date, endTime: Date) -> Float {
         //FIXME: This calculation will caclulate fractional hours - limit to whole hours in View?
-        //default charges to 0.0
-        var phase1Charge: Float = 0.0
-        var phase2Charge: Float = 0.0
-        var phase3Charge: Float = 0.0
         
         //calculate number of hours worked from startTime to endTime
-        //startTime -> bedTime
-        var numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime)
-        //bedTime -> midnightTime
-        var numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime)
-        //midnightTime -> endTime
-        var numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime)
-        //bedTime -> endTime, to see if endtime comes before bedtime
-        let numOfHoursForBedTimeToEndTime = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: endTime)
+        var numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime) //startTime -> bedTime
+        var numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime) //bedTime -> midnightTime
+        var numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime) //midnightTime -> endTime
+        //check to see if endtime comes before bedtime
+        let numOfHoursForBedTimeToEndTime = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: endTime) //bedTime -> endTime
         
         //We need to allow for bedTime to be after midnight and endTime to be before midnight
-        //Check if bedtime is after midnight and adjust
-        if numOfHoursForPhase2<0{
-            //subtract the number of hours calculated that bedtime is after midnight
-            numOfHoursForPhase1 = numOfHoursForPhase1+numOfHoursForPhase2
-        }
-        
-        //check if endTIme is before Midnight
-        if numOfHoursForPhase3<0{
-            numOfHoursForPhase2 = numOfHoursForPhase2+numOfHoursForPhase3
-        }
+        //Check if bedtime is after midnight and adjust by subtracting the number of hours calculated that bedtime is after midnight
+        numOfHoursForPhase1 = numOfHoursForPhase2<0 ? numOfHoursForPhase1+numOfHoursForPhase2 : numOfHoursForPhase1
+
+        //check if endTIme is before Midnight by subtracting the number of hours calculated that midnightTime is after endTime
+        numOfHoursForPhase2 = numOfHoursForPhase3<0 ? numOfHoursForPhase2+numOfHoursForPhase3 : numOfHoursForPhase2
         
         //check if endTime is before bedtime & midnight, if it is we only need to calculate startTime -> endTime
         if numOfHoursForBedTimeToEndTime<0 && numOfHoursForPhase3<0{
@@ -60,17 +48,10 @@ struct Babysitter {
         
         //calculate the charge in deimal to charge for each work span
         //prevent a negative phase charge from impacting the calculation
-        if numOfHoursForPhase1>0{
-            phase1Charge = Float(numOfHoursForPhase1)*startToBedTimeWage
-        }
-
-        if numOfHoursForPhase2>0{
-            phase2Charge = Float(numOfHoursForPhase2)*bedtimeToMidnightWage
-        }
-
-        if numOfHoursForPhase3>0{
-            phase3Charge = Float(numOfHoursForPhase3)*midnightToEndOfJobWage
-        }
+        let phase1Charge = numOfHoursForPhase1>0 ? Float(numOfHoursForPhase1)*startToBedTimeWage : 0
+        let phase2Charge = numOfHoursForPhase2>0 ? Float(numOfHoursForPhase2)*bedtimeToMidnightWage : 0
+        let phase3Charge = numOfHoursForPhase3>0 ? Float(numOfHoursForPhase3)*midnightToEndOfJobWage : 0
+        
         
         return phase1Charge+phase2Charge+phase3Charge
     }
@@ -104,9 +85,9 @@ struct Babysitter {
 let babysitter = Babysitter()
 //setup time constants for the hours worked. -0400 sets to our timezone
 let startTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 17:00:00 -0400")
-let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 03:00:00 -0400")
+let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 21:00:00 -0400")
 let midnightTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
-let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 01:00:00 -0400")
+let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 04:00:00 -0400")
 
 let amountToCharge = babysitter.calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime)
 print("The babysitter made \(babysitter.formatChargeIntoCurrency(charge: amountToCharge)) tonight")
