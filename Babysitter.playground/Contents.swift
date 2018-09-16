@@ -35,6 +35,12 @@ struct Babysitter {
         return dateFormatter.date(from: dateString)!
     }
     
+    //Need to get the number of hours worked to cacluate wages.
+    //First get the difference in hours between two dates
+    func differenceInHoursBetweenTwoDates(fromDate: Date, toDate: Date) -> Int{
+        return Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour ?? 0
+    }
+    
 }
 
 
@@ -43,4 +49,7 @@ let babysitter = Babysitter()
 let startTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 17:00:00 -0400")
 let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 21:00:00 -0400")
 let midnightTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
-let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
+let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 04:00:00 -0400")
+//test differenceInHoursBetweenTwoDates function (temporary)
+print(babysitter.differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: endTime))
+print(babysitter.differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime))
