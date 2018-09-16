@@ -23,7 +23,18 @@ struct Babysitter {
     
     //calculate the nightly charge for hours worked
     func calculateNightlyCharge(startTime: Date, bedTime: Date, midnightTime: Date, endTime: Date) -> Float {
-        return 0.0
+        //FIXME: This calculation will caclulate fractional hours - limit to whole hours in View?
+        //calculate number of hours worked from startTime to endTime
+        let numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime)
+        let numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime)
+        let numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime)
+        
+        //calculate the charge in deimal to charge for each work span
+        let phase1Charge = Float(numOfHoursForPhase1)*startToBedTimeWage
+        let phase2Charge = Float(numOfHoursForPhase2)*startToBedTimeWage
+        let phase3Charge = Float(numOfHoursForPhase3)*midnightToEndOfJobWage
+        
+        return phase1Charge+phase2Charge+phase3Charge
     }
     
     //convert the Date from String to Date
@@ -50,6 +61,6 @@ let startTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 17:00
 let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 21:00:00 -0400")
 let midnightTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
 let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 04:00:00 -0400")
-//test differenceInHoursBetweenTwoDates function (temporary)
-print(babysitter.differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: endTime))
-print(babysitter.differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime))
+
+//test calculateNightlyCharge function (temporary)
+print(babysitter.calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime))
