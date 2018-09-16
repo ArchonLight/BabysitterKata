@@ -20,17 +20,17 @@ struct Babysitter {
     let startToBedTimeWage: Float = 12.0
     let bedtimeToMidnightWage: Float = 8.0
     let midnightToEndOfJobWage : Float = 16.0
+    let fractionalAllowed: Bool = false
     
     //calculate the nightly charge for hours worked
     func calculateNightlyCharge(startTime: Date, bedTime: Date, midnightTime: Date, endTime: Date) -> Float {
-        //FIXME: This calculation will caclulate fractional hours - limit to whole hours in View?
         
         //calculate number of hours worked from startTime to endTime
-        var numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime) //startTime -> bedTime
-        var numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime) //bedTime -> midnightTime
-        var numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime) //midnightTime -> endTime
+        var numOfHoursForPhase1 = differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime, allowFractional: false) //startTime -> bedTime
+        var numOfHoursForPhase2 = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: midnightTime, allowFractional: false) //bedTime -> midnightTime
+        var numOfHoursForPhase3 = differenceInHoursBetweenTwoDates(fromDate: midnightTime, toDate: endTime, allowFractional: false) //midnightTime -> endTime
         //check to see if endtime comes before bedtime
-        let numOfHoursForBedTimeToEndTime = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: endTime) //bedTime -> endTime
+        let numOfHoursForBedTimeToEndTime = differenceInHoursBetweenTwoDates(fromDate: bedTime, toDate: endTime, allowFractional: false) //bedTime -> endTime
         
         //We need to allow for bedTime to be after midnight and endTime to be before midnight
         //Check if bedtime is after midnight and adjust by subtracting the number of hours calculated that bedtime is after midnight
@@ -52,7 +52,7 @@ struct Babysitter {
         let phase2Charge = numOfHoursForPhase2>0 ? Float(numOfHoursForPhase2)*bedtimeToMidnightWage : 0
         let phase3Charge = numOfHoursForPhase3>0 ? Float(numOfHoursForPhase3)*midnightToEndOfJobWage : 0
         
-        
+        print("Total Hours: \(numOfHoursForPhase1+numOfHoursForPhase2+numOfHoursForPhase3)")
         return phase1Charge+phase2Charge+phase3Charge
     }
     
@@ -67,8 +67,35 @@ struct Babysitter {
     
     //Need to get the number of hours worked to cacluate wages.
     //First get the difference in hours between two dates
-    func differenceInHoursBetweenTwoDates(fromDate: Date, toDate: Date) -> Int{
-        return Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour ?? 0
+    func differenceInHoursBetweenTwoDates(fromDate: Date, toDate: Date, allowFractional: Bool) -> Int{
+        
+        //set new variables to current dates, if fractional is allowed, just skip rounding to the top of the hour
+        var fractionalFromDate = fromDate
+        var fractionalToDate = toDate
+        
+        //if fractional is not allowed, get the floor of the hour
+        if !allowFractional {
+            fractionalFromDate = getFloorForCurrentHour(date: fromDate)!
+            fractionalToDate = getCeilingForCurrentHour(date: toDate)!
+        }
+        
+        return Calendar.current.dateComponents([.hour], from: fractionalFromDate, to: fractionalToDate).hour ?? 0
+    }
+    
+    //take the current hour of supplied date and return it to the top of the hour
+    func getFloorForCurrentHour(date: Date) -> Date?{
+        var components = NSCalendar.current.dateComponents([.minute], from: date)
+        let minute = components.minute ?? 0
+        components.minute = -minute
+        return Calendar.current.date(byAdding: components, to: date)
+    }
+    
+    //take the current hour of supplied date and advance it to the top of the NEXT hour
+    func getCeilingForCurrentHour(date: Date) -> Date?{
+        var components = NSCalendar.current.dateComponents([.minute], from: date)
+        let minute = components.minute ?? 0
+        components.minute = +minute
+        return Calendar.current.date(byAdding: components, to: date)
     }
     
     //Format our charge calculation into readable String
@@ -84,10 +111,10 @@ struct Babysitter {
 
 let babysitter = Babysitter()
 //setup time constants for the hours worked. -0400 sets to our timezone
-let startTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 17:00:00 -0400")
+let startTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 17:30:00 -0400")
 let bedTime = babysitter.convertDateStringToDate(dateString: "2018-09-16 21:00:00 -0400")
 let midnightTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 00:00:00 -0400")
-let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 04:00:00 -0400")
+let endTime = babysitter.convertDateStringToDate(dateString: "2018-09-17 01:30:00 -0400")
 
 let amountToCharge = babysitter.calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime)
 print("The babysitter made \(babysitter.formatChargeIntoCurrency(charge: amountToCharge)) tonight")
