@@ -50,7 +50,7 @@ class Utility {
     
     //MARK: Private functions
     //take the current hour of supplied date and return it to the top of the hour
-    func getFloorForCurrentHour(date: Date) -> Date?{
+    private func getFloorForCurrentHour(date: Date) -> Date?{
         var components = NSCalendar.current.dateComponents([.minute], from: date)
         let minute = components.minute ?? 0
         components.minute = -minute
@@ -58,7 +58,7 @@ class Utility {
     }
     
     //take the current hour of supplied date and advance it to the top of the NEXT hour
-    func getCeilingForCurrentHour(date: Date) -> Date?{
+    private func getCeilingForCurrentHour(date: Date) -> Date?{
         var components = NSCalendar.current.dateComponents([.minute], from: date)
         let minute = components.minute ?? 0
         components.minute = +minute
