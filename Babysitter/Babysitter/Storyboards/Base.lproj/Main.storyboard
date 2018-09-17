@@ -17,12 +17,99 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DY-Nl-yrV">
+                                <rect key="frame" x="16" y="45" width="343" height="98.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="72"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Start Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAx-U2-Hwx">
+                                <rect key="frame" x="16" y="177" width="115" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Bed Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4g-6n-UGF">
+                                <rect key="frame" x="16" y="243" width="107" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set End Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlj-jS-Jzl">
+                                <rect key="frame" x="16" y="309" width="107" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="5" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="nXH-DN-7XB">
+                                <rect key="frame" x="16" y="198" width="345" height="31"/>
+                                <connections>
+                                    <action selector="setStartTimeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="ZM3-db-EKl"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="8" minValue="5" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="TTl-9z-d4W">
+                                <rect key="frame" x="16" y="263" width="345" height="31"/>
+                                <connections>
+                                    <action selector="setBedTimeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="o0H-Ce-4AQ"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="6" maxValue="16" translatesAutoresizingMaskIntoConstraints="NO" id="ubw-wq-6ln">
+                                <rect key="frame" x="14" y="328" width="345" height="31"/>
+                                <connections>
+                                    <action selector="setEndTimeAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="0aJ-xz-ENz"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsC-0X-oaW" customClass="BabysitterButton" customModule="Babysitter" customModuleProvider="target">
+                                <rect key="frame" x="16" y="582" width="343" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="HoT-w4-w5Z"/>
+                                </constraints>
+                                <state key="normal" title="Calculate"/>
+                                <connections>
+                                    <action selector="calculateTotalWages:" destination="BYZ-38-t0r" eventType="touchUpInside" id="buN-Uc-hMf"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nlj-jS-Jzl" firstAttribute="top" secondItem="TTl-9z-d4W" secondAttribute="bottom" constant="16" id="01V-yH-Cq2"/>
+                            <constraint firstItem="ubw-wq-6ln" firstAttribute="top" secondItem="nlj-jS-Jzl" secondAttribute="bottom" constant="-2" id="5Xg-j6-mHh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8DY-Nl-yrV" secondAttribute="trailing" constant="16" id="6X5-55-KaR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ubw-wq-6ln" secondAttribute="trailing" constant="18" id="A2Q-bU-Hm3"/>
+                            <constraint firstItem="NAx-U2-Hwx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ATN-4i-KRu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TTl-9z-d4W" secondAttribute="trailing" constant="16" id="ClP-4C-Lnd"/>
+                            <constraint firstItem="nlj-jS-Jzl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="GTj-vW-LPM"/>
+                            <constraint firstItem="lsC-0X-oaW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Gf2-ht-bOC"/>
+                            <constraint firstItem="s4g-6n-UGF" firstAttribute="top" secondItem="nXH-DN-7XB" secondAttribute="bottom" constant="15" id="Gij-jj-2GO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nXH-DN-7XB" secondAttribute="trailing" constant="16" id="HgB-qW-Oti"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lsC-0X-oaW" secondAttribute="bottom" constant="20" id="KmK-3O-IlP"/>
+                            <constraint firstItem="8DY-Nl-yrV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Kra-dt-0oI"/>
+                            <constraint firstItem="nXH-DN-7XB" firstAttribute="top" secondItem="NAx-U2-Hwx" secondAttribute="bottom" id="WQL-1f-URn"/>
+                            <constraint firstItem="8DY-Nl-yrV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="cO1-tv-WsW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lsC-0X-oaW" secondAttribute="trailing" constant="16" id="cmv-q6-nle"/>
+                            <constraint firstItem="nXH-DN-7XB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="18" id="cqI-Ts-5gN"/>
+                            <constraint firstItem="nlj-jS-Jzl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="dfE-bQ-6cJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nlj-jS-Jzl" secondAttribute="trailing" constant="252" id="lUb-UO-p8M"/>
+                            <constraint firstItem="s4g-6n-UGF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ll7-9U-QLa"/>
+                            <constraint firstItem="NAx-U2-Hwx" firstAttribute="top" secondItem="8DY-Nl-yrV" secondAttribute="bottom" constant="33.5" id="mcJ-BL-Kbr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NAx-U2-Hwx" secondAttribute="trailing" constant="244" id="q1c-kg-2lk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nlj-jS-Jzl" secondAttribute="trailing" constant="252" id="rHH-rt-j3Z"/>
+                            <constraint firstItem="TTl-9z-d4W" firstAttribute="top" secondItem="s4g-6n-UGF" secondAttribute="bottom" constant="-1" id="rRJ-zn-dJt"/>
+                            <constraint firstItem="TTl-9z-d4W" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="18" id="s3f-b5-2rs"/>
+                            <constraint firstItem="ubw-wq-6ln" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="xTG-9Y-K9E"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="s4g-6n-UGF" secondAttribute="trailing" constant="252" id="yKk-1r-a9K"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="calculateButton" destination="lsC-0X-oaW" id="C3C-Fg-HMW"/>
+                        <outlet property="totalChargeLabel" destination="8DY-Nl-yrV" id="6Qv-Sf-KBf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="31.934032983508249"/>
         </scene>
     </scenes>
 </document>

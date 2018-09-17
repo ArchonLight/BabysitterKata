@@ -9,6 +9,13 @@
 import UIKit
 
 class BabysitterViewController: UIViewController {
+    @IBOutlet weak var totalChargeLabel: UILabel!
+    @IBOutlet weak var calculateButton: UIButton!
+    
+    var startTime: Date?
+    var bedTime: Date?
+    var midnightTime: Date?
+    var endTime: Date?
     
     let utility = Utility()
     
@@ -16,7 +23,6 @@ class BabysitterViewController: UIViewController {
     let startToBedTimeWage: Float = 12.0
     let bedtimeToMidnightWage: Float = 8.0
     let midnightToEndOfJobWage : Float = 16.0
-    let fractionalAllowed: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +36,7 @@ class BabysitterViewController: UIViewController {
     
     //MARK: Calculation Logic
     //calculate the nightly charge for hours worked
-    func calculateNightlyCharge(startTime: Date, bedTime: Date, midnightTime: Date, endTime: Date) -> Float {
+    private func calculateNightlyCharge(startTime: Date, bedTime: Date, midnightTime: Date, endTime: Date) -> Float {
         
         //calculate number of hours worked from startTime to endTime
         var numOfHoursForPhase1 = utility.differenceInHoursBetweenTwoDates(fromDate: startTime, toDate: bedTime, allowFractional: false) //startTime -> bedTime
@@ -61,6 +67,26 @@ class BabysitterViewController: UIViewController {
         
         return phase1Charge+phase2Charge+phase3Charge
     }
-
+    
+    private func setCalculateButtonState(){
+        //check if all date variables are set, if so, allow interaction on Calculate Button
+    }
+    
+    @IBAction func setStartTimeAction(_ sender: UISlider) {
+        //set startTime variable
+    }
+    
+    @IBAction func setBedTimeAction(_ sender: UISlider) {
+        //set bedTime variable
+    }
+    
+    @IBAction func setEndTimeAction(_ sender: UISlider) {
+        //set endTime variable
+    }
+    
+    @IBAction func calculateTotalWages(_ sender: UIButton) {
+//        calculateNightlyCharge(startTime: startTime, bedTime: bedTime, midnightTime: midnightTime, endTime: endTime)
+    }
+    
 }
 

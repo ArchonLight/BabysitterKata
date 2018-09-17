@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class Utility {
+    let fractionalAllowed: Bool = false
+    
     //MARK: Date Formatter
     //convert the Date from String to Date
     public func convertDateStringToDate(dateString: String) -> Date{

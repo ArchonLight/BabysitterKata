@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2746597A214F1F7B00D665B1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465979214F1F7B00D665B1 /* Utility.swift */; };
 		2746597B214F1F7B00D665B1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27465979214F1F7B00D665B1 /* Utility.swift */; };
+		2746597E214F24C800D665B1 /* BabysitterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2746597D214F24C800D665B1 /* BabysitterButton.swift */; };
+		2746597F214F24C800D665B1 /* BabysitterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2746597D214F24C800D665B1 /* BabysitterButton.swift */; };
+		27465982214F277A00D665B1 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 27465981214F277A00D665B1 /* Avenir.ttc */; };
 		275B06C5214EFDB70036CAD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275B06C4214EFDB70036CAD0 /* AppDelegate.swift */; };
 		275B06C7214EFDB70036CAD0 /* BabysitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275B06C6214EFDB70036CAD0 /* BabysitterViewController.swift */; };
 		275B06CA214EFDB70036CAD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 275B06C8214EFDB70036CAD0 /* Main.storyboard */; };
@@ -29,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		27465979214F1F7B00D665B1 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		2746597D214F24C800D665B1 /* BabysitterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabysitterButton.swift; sourceTree = "<group>"; };
+		27465981214F277A00D665B1 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
 		275B06C1214EFDB70036CAD0 /* Babysitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babysitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		275B06C4214EFDB70036CAD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		275B06C6214EFDB70036CAD0 /* BabysitterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabysitterViewController.swift; sourceTree = "<group>"; };
@@ -70,8 +75,17 @@
 		2746597C214F207900D665B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2746597D214F24C800D665B1 /* BabysitterButton.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		27465980214F26DB00D665B1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				27465981214F277A00D665B1 /* Avenir.ttc */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		275B06B8214EFDB60036CAD0 = {
@@ -100,8 +114,8 @@
 				27465978214F1F3B00D665B1 /* Utility */,
 				275B06E5214EFE660036CAD0 /* View Controllers */,
 				275B06E4214EFE540036CAD0 /* Storyboards */,
+				27465980214F26DB00D665B1 /* Fonts */,
 				275B06CB214EFDD10036CAD0 /* Assets.xcassets */,
-				275B06CD214EFDD10036CAD0 /* LaunchScreen.storyboard */,
 				275B06D0214EFDD20036CAD0 /* Info.plist */,
 			);
 			path = Babysitter;
@@ -119,6 +133,7 @@
 		275B06E4214EFE540036CAD0 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				275B06CD214EFDD10036CAD0 /* LaunchScreen.storyboard */,
 				275B06C8214EFDB70036CAD0 /* Main.storyboard */,
 			);
 			path = Storyboards;
@@ -213,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27465982214F277A00D665B1 /* Avenir.ttc in Resources */,
 				275B06CF214EFDD10036CAD0 /* LaunchScreen.storyboard in Resources */,
 				275B06CC214EFDD10036CAD0 /* Assets.xcassets in Resources */,
 				275B06CA214EFDB70036CAD0 /* Main.storyboard in Resources */,
@@ -235,6 +251,7 @@
 			files = (
 				275B06C7214EFDB70036CAD0 /* BabysitterViewController.swift in Sources */,
 				275B06C5214EFDB70036CAD0 /* AppDelegate.swift in Sources */,
+				2746597E214F24C800D665B1 /* BabysitterButton.swift in Sources */,
 				2746597A214F1F7B00D665B1 /* Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2746597F214F24C800D665B1 /* BabysitterButton.swift in Sources */,
 				2746597B214F1F7B00D665B1 /* Utility.swift in Sources */,
 				275B06DA214EFDD20036CAD0 /* BabysitterTests.swift in Sources */,
 			);
@@ -399,6 +417,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U68KXKFGC6;
 				INFOPLIST_FILE = Babysitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -417,6 +436,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U68KXKFGC6;
 				INFOPLIST_FILE = Babysitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
